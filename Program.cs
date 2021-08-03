@@ -53,7 +53,9 @@ namespace CollectionsAndStuff
             // our dictionary is keyed by strings and has strings
             // much more specific, optimized; find one thing really quickly
             // think of it like retrieving objects by id or by firebase key (in frontend)
-            var dictionary = new Dictionary<string, string>();
+            // Good for: infrequently updated but often read data
+            // Good for: loading information at startup or in the background and fast retrieval on demand (caching)
+            var dictionary = new Dictionary<string, string>(); // closed generic (we have told it how to behave)
 
             // adding things requires key + value
             dictionary.Add("penultimate", "second to last");
@@ -65,6 +67,7 @@ namespace CollectionsAndStuff
             var definition = dictionary["Arbitrary"];
 
             // try methods return a boolean indicating success or failure
+            // kind of expensive just to find out if the key exists
             // ! indicates that the starting boolean is "false", rather than "true"
             if (!dictionary.TryAdd("penultimate", "second to last"))
             {
@@ -113,6 +116,9 @@ namespace CollectionsAndStuff
             // Like a list - store a value at an index
             // like a dictionary - each value has to be unique
             // different - eliminates non-unique stuff without errors
+            // pretty slow at adding data
+            // super fast getting data out, comparing data
+            // uses Hashcodes to figure out uniqueness
             // The HashSet<T> class provides high-performance set operations. A set is a collection that contains no duplicate elements, and whose elements are in no particular order.
             var uniqueNames = new HashSet<string>();
             uniqueNames.Add("Jameka");
